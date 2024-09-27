@@ -1,0 +1,65 @@
+CREATE TABLE "myfirstmodule$salestrackingtable_temporary" (
+	"id" BIGINT NOT NULL,
+	"orderquantity" INT NULL,
+	"unitprice" DECIMAL(28, 8) NULL,
+	"discountamount" DECIMAL(28, 8) NULL,
+	"productstandardcost" DECIMAL(28, 8) NULL,
+	"taxamt" DECIMAL(28, 8) NULL,
+	"orderdate" TIMESTAMP NULL,
+	"duedate" TIMESTAMP NULL,
+	"shipdate" TIMESTAMP NULL,
+	"salesid" BIGINT NULL,
+	PRIMARY KEY("id"));
+CREATE SEQUENCE "myfirstmodule$salestrackingtable_temporary_salesid_mxseq" AS BIGINT START WITH 1;
+INSERT INTO "mendixsystem$entity" ("id", "entity_name", "table_name", "remote", "remote_primary_key") VALUES ('2337728f-7de6-4456-8e10-a273987a47aa', 'MyFirstModule.SalesTrackingTable_Temporary', 'myfirstmodule$salestrackingtable_temporary', false, false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('fb595b44-9724-4d89-8785-2e069e231358', '2337728f-7de6-4456-8e10-a273987a47aa', 'OrderQuantity', 'orderquantity', 3, 0, '0', false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('2fe23457-8dce-4f83-90c2-832a35fc5725', '2337728f-7de6-4456-8e10-a273987a47aa', 'UnitPrice', 'unitprice', 5, 0, '0', false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('7d6b86c5-0289-43ca-b9c7-67aab32699a7', '2337728f-7de6-4456-8e10-a273987a47aa', 'DiscountAmount', 'discountamount', 5, 0, '0', false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('c186a9f1-06c8-4f51-97f4-cf46ab5ffc73', '2337728f-7de6-4456-8e10-a273987a47aa', 'ProductStandardCost', 'productstandardcost', 5, 0, '0', false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('9191e424-546c-4ae1-9abf-d73bef72779f', '2337728f-7de6-4456-8e10-a273987a47aa', 'TaxAmt', 'taxamt', 5, 0, '0', false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('add9db22-9b8d-4bb4-bd69-b0af226c0455', '2337728f-7de6-4456-8e10-a273987a47aa', 'OrderDate', 'orderdate', 20, 0, '', false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('bded3c8e-81fb-4555-a8b0-169e2e210f45', '2337728f-7de6-4456-8e10-a273987a47aa', 'DueDate', 'duedate', 20, 0, '', false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('61a50695-ed30-42fa-8f47-25b66b1e9438', '2337728f-7de6-4456-8e10-a273987a47aa', 'ShipDate', 'shipdate', 20, 0, '', false);
+INSERT INTO "mendixsystem$attribute" ("id", "entity_id", "attribute_name", "column_name", "type", "length", "default_value", "is_auto_number") VALUES ('d60788b6-9887-4c0c-9387-da3a921999fe', '2337728f-7de6-4456-8e10-a273987a47aa', 'SalesId', 'salesid', 0, 0, '1', true);
+INSERT INTO "mendixsystem$sequence" ("attribute_id", "name", "start_value", "current_value") VALUES ('d60788b6-9887-4c0c-9387-da3a921999fe', 'myfirstmodule$salestrackingtable_temporary_salesid_mxseq', 1, 0);
+CREATE TABLE "myfirstmodule$salestrackingtable_temporary_products" (
+	"myfirstmodule$salestrackingtable_temporaryid" BIGINT NOT NULL,
+	"myfirstmodule$productsid" BIGINT NOT NULL,
+	PRIMARY KEY("myfirstmodule$salestrackingtable_temporaryid","myfirstmodule$productsid"),
+	CONSTRAINT "uniq_myfirstmodule$salestrackingtable_temporary_products_myfirstmodule$salestrackingtable_temporaryid" UNIQUE ("myfirstmodule$salestrackingtable_temporaryid"),
+	CONSTRAINT "frn_myfirstmodule$salestrackingtable_temporary_products_myfirstmodule$salestrackingtable_temporaryid" FOREIGN KEY ( "myfirstmodule$salestrackingtable_temporaryid" ) REFERENCES "myfirstmodule$salestrackingtable_temporary" ( "id" ) ON DELETE CASCADE,
+	CONSTRAINT "frn_myfirstmodule$salestrackingtable_temporary_products_myfirstmodule$productsid" FOREIGN KEY ( "myfirstmodule$productsid" ) REFERENCES "myfirstmodule$products" ( "id" ) ON DELETE CASCADE);
+CREATE INDEX "idx_myfirstmodule$salestrackingtable_temporary_products_myfirstmodule$products_myfirstmodule$salestrackingtable_temporary" ON "myfirstmodule$salestrackingtable_temporary_products" ("myfirstmodule$productsid" ASC,"myfirstmodule$salestrackingtable_temporaryid" ASC);
+INSERT INTO "mendixsystem$association" ("id", "association_name", "table_name", "parent_entity_id", "child_entity_id", "parent_column_name", "child_column_name", "index_name", "parent_fkc_name", "child_fkc_name", "parent_fkc_action", "child_fkc_action") VALUES ('363eb074-f1e1-425f-a743-4796fa42a277', 'MyFirstModule.SalesTrackingTable_Temporary_Products', 'myfirstmodule$salestrackingtable_temporary_products', '2337728f-7de6-4456-8e10-a273987a47aa', '5bbc2856-cc33-410b-a959-6f9725de4843', 'myfirstmodule$salestrackingtable_temporaryid', 'myfirstmodule$productsid', 'idx_myfirstmodule$salestrackingtable_temporary_products_myfirstmodule$products_myfirstmodule$salestrackingtable_temporary', 'frn_myfirstmodule$salestrackingtable_temporary_products_myfirstmodule$salestrackingtable_temporaryid', 'frn_myfirstmodule$salestrackingtable_temporary_products_myfirstmodule$productsid', 0, 0);
+INSERT INTO "mendixsystem$unique_constraint" ("name", "table_id", "column_id") VALUES ('uniq_myfirstmodule$salestrackingtable_temporary_products_myfirstmodule$salestrackingtable_temporaryid', '363eb074-f1e1-425f-a743-4796fa42a277', 'e3729b3a-73c4-3fd6-a6a0-8875ab755d92');
+CREATE TABLE "myfirstmodule$salestrackingtable_temporary_locations" (
+	"myfirstmodule$salestrackingtable_temporaryid" BIGINT NOT NULL,
+	"myfirstmodule$locationsid" BIGINT NOT NULL,
+	PRIMARY KEY("myfirstmodule$salestrackingtable_temporaryid","myfirstmodule$locationsid"),
+	CONSTRAINT "uniq_myfirstmodule$salestrackingtable_temporary_locations_myfirstmodule$salestrackingtable_temporaryid" UNIQUE ("myfirstmodule$salestrackingtable_temporaryid"),
+	CONSTRAINT "frn_myfirstmodule$salestrackingtable_temporary_locations_myfirstmodule$salestrackingtable_temporaryid" FOREIGN KEY ( "myfirstmodule$salestrackingtable_temporaryid" ) REFERENCES "myfirstmodule$salestrackingtable_temporary" ( "id" ) ON DELETE CASCADE,
+	CONSTRAINT "frn_myfirstmodule$salestrackingtable_temporary_locations_myfirstmodule$locationsid" FOREIGN KEY ( "myfirstmodule$locationsid" ) REFERENCES "myfirstmodule$locations" ( "id" ) ON DELETE CASCADE);
+CREATE INDEX "idx_myfirstmodule$salestrackingtable_temporary_locations_myfirstmodule$locations_myfirstmodule$salestrackingtable_temporary" ON "myfirstmodule$salestrackingtable_temporary_locations" ("myfirstmodule$locationsid" ASC,"myfirstmodule$salestrackingtable_temporaryid" ASC);
+INSERT INTO "mendixsystem$association" ("id", "association_name", "table_name", "parent_entity_id", "child_entity_id", "parent_column_name", "child_column_name", "index_name", "parent_fkc_name", "child_fkc_name", "parent_fkc_action", "child_fkc_action") VALUES ('392a2970-dad6-4e82-91ae-ba7467350006', 'MyFirstModule.SalesTrackingTable_Temporary_Locations', 'myfirstmodule$salestrackingtable_temporary_locations', '2337728f-7de6-4456-8e10-a273987a47aa', '6d9c439c-12e6-4f00-9723-65bdad07b64f', 'myfirstmodule$salestrackingtable_temporaryid', 'myfirstmodule$locationsid', 'idx_myfirstmodule$salestrackingtable_temporary_locations_myfirstmodule$locations_myfirstmodule$salestrackingtable_temporary', 'frn_myfirstmodule$salestrackingtable_temporary_locations_myfirstmodule$salestrackingtable_temporaryid', 'frn_myfirstmodule$salestrackingtable_temporary_locations_myfirstmodule$locationsid', 0, 0);
+INSERT INTO "mendixsystem$unique_constraint" ("name", "table_id", "column_id") VALUES ('uniq_myfirstmodule$salestrackingtable_temporary_locations_myfirstmodule$salestrackingtable_temporaryid', '392a2970-dad6-4e82-91ae-ba7467350006', '2abdbe43-ef40-3c8c-b351-f5b7316a20a5');
+CREATE TABLE "myfirstmodule$salestrackingtable_temporary_customers" (
+	"myfirstmodule$salestrackingtable_temporaryid" BIGINT NOT NULL,
+	"myfirstmodule$customersid" BIGINT NOT NULL,
+	PRIMARY KEY("myfirstmodule$salestrackingtable_temporaryid","myfirstmodule$customersid"),
+	CONSTRAINT "uniq_myfirstmodule$salestrackingtable_temporary_customers_myfirstmodule$salestrackingtable_temporaryid" UNIQUE ("myfirstmodule$salestrackingtable_temporaryid"),
+	CONSTRAINT "frn_myfirstmodule$salestrackingtable_temporary_customers_myfirstmodule$salestrackingtable_temporaryid" FOREIGN KEY ( "myfirstmodule$salestrackingtable_temporaryid" ) REFERENCES "myfirstmodule$salestrackingtable_temporary" ( "id" ) ON DELETE CASCADE,
+	CONSTRAINT "frn_myfirstmodule$salestrackingtable_temporary_customers_myfirstmodule$customersid" FOREIGN KEY ( "myfirstmodule$customersid" ) REFERENCES "myfirstmodule$customers" ( "id" ) ON DELETE CASCADE);
+CREATE INDEX "idx_myfirstmodule$salestrackingtable_temporary_customers_myfirstmodule$customers_myfirstmodule$salestrackingtable_temporary" ON "myfirstmodule$salestrackingtable_temporary_customers" ("myfirstmodule$customersid" ASC,"myfirstmodule$salestrackingtable_temporaryid" ASC);
+INSERT INTO "mendixsystem$association" ("id", "association_name", "table_name", "parent_entity_id", "child_entity_id", "parent_column_name", "child_column_name", "index_name", "parent_fkc_name", "child_fkc_name", "parent_fkc_action", "child_fkc_action") VALUES ('9926c86a-32bc-4585-a8a5-57541c337f20', 'MyFirstModule.SalesTrackingTable_Temporary_Customers', 'myfirstmodule$salestrackingtable_temporary_customers', '2337728f-7de6-4456-8e10-a273987a47aa', '211a81ef-46c8-4839-8342-3b4b20dd178f', 'myfirstmodule$salestrackingtable_temporaryid', 'myfirstmodule$customersid', 'idx_myfirstmodule$salestrackingtable_temporary_customers_myfirstmodule$customers_myfirstmodule$salestrackingtable_temporary', 'frn_myfirstmodule$salestrackingtable_temporary_customers_myfirstmodule$salestrackingtable_temporaryid', 'frn_myfirstmodule$salestrackingtable_temporary_customers_myfirstmodule$customersid', 0, 0);
+INSERT INTO "mendixsystem$unique_constraint" ("name", "table_id", "column_id") VALUES ('uniq_myfirstmodule$salestrackingtable_temporary_customers_myfirstmodule$salestrackingtable_temporaryid', '9926c86a-32bc-4585-a8a5-57541c337f20', '09cb1860-ba94-3562-a1b0-5de4df9328f0');
+CREATE TABLE "myfirstmodule$salestrackingtable_temporary_salesperson" (
+	"myfirstmodule$salestrackingtable_temporaryid" BIGINT NOT NULL,
+	"myfirstmodule$salespersonid" BIGINT NOT NULL,
+	PRIMARY KEY("myfirstmodule$salestrackingtable_temporaryid","myfirstmodule$salespersonid"),
+	CONSTRAINT "uniq_myfirstmodule$salestrackingtable_temporary_salesperson_myfirstmodule$salestrackingtable_temporaryid" UNIQUE ("myfirstmodule$salestrackingtable_temporaryid"),
+	CONSTRAINT "frn_myfirstmodule$salestrackingtable_temporary_salesperson_myfirstmodule$salestrackingtable_temporaryid" FOREIGN KEY ( "myfirstmodule$salestrackingtable_temporaryid" ) REFERENCES "myfirstmodule$salestrackingtable_temporary" ( "id" ) ON DELETE CASCADE,
+	CONSTRAINT "frn_myfirstmodule$salestrackingtable_temporary_salesperson_myfirstmodule$salespersonid" FOREIGN KEY ( "myfirstmodule$salespersonid" ) REFERENCES "myfirstmodule$salesperson" ( "id" ) ON DELETE CASCADE);
+CREATE INDEX "idx_myfirstmodule$salestrackingtable_temporary_salesperson_myfirstmodule$salesperson_myfirstmodule$salestrackingtable_temporary" ON "myfirstmodule$salestrackingtable_temporary_salesperson" ("myfirstmodule$salespersonid" ASC,"myfirstmodule$salestrackingtable_temporaryid" ASC);
+INSERT INTO "mendixsystem$association" ("id", "association_name", "table_name", "parent_entity_id", "child_entity_id", "parent_column_name", "child_column_name", "index_name", "parent_fkc_name", "child_fkc_name", "parent_fkc_action", "child_fkc_action") VALUES ('fcb34b2c-479b-4eb4-beef-8d0b6135b37e', 'MyFirstModule.SalesTrackingTable_Temporary_SalesPerson', 'myfirstmodule$salestrackingtable_temporary_salesperson', '2337728f-7de6-4456-8e10-a273987a47aa', '896a7160-3888-4ca5-86c8-24ac563de62c', 'myfirstmodule$salestrackingtable_temporaryid', 'myfirstmodule$salespersonid', 'idx_myfirstmodule$salestrackingtable_temporary_salesperson_myfirstmodule$salesperson_myfirstmodule$salestrackingtable_temporary', 'frn_myfirstmodule$salestrackingtable_temporary_salesperson_myfirstmodule$salestrackingtable_temporaryid', 'frn_myfirstmodule$salestrackingtable_temporary_salesperson_myfirstmodule$salespersonid', 0, 0);
+INSERT INTO "mendixsystem$unique_constraint" ("name", "table_id", "column_id") VALUES ('uniq_myfirstmodule$salestrackingtable_temporary_salesperson_myfirstmodule$salestrackingtable_temporaryid', 'fcb34b2c-479b-4eb4-beef-8d0b6135b37e', '817e4547-d5ff-3fa0-914d-14f018a62749');
+UPDATE "mendixsystem$version" SET "versionnumber" = '4.2', "lastsyncdate" = '20240927 16:46:12';
