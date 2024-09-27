@@ -735,3 +735,11 @@ INSERT INTO "system$queuedtask" VALUES(4785074604347183,1117,'Idle','59651013-f9
 INSERT INTO "system$processedqueuetask" VALUES(13510798882377518,1107,'Completed','59651013-f9bc-4fc1-b435-276439b07899','System.ScheduledEventsQueue','ScheduledEvent',NULL,NULL,'ClusterManagement-MigrateOldFiles','[]','cc7f5047-625c-49fe-9eea-1167c0d1bc8f',44,'2024-09-27 12:43:42.462000','2024-09-27 12:48:42.044000','2024-09-27 12:48:42.353000','2024-09-27 12:48:42.359000',6,0,NULL,'ClusterManagement-MigrateOldFiles',NULL)
 DELETE FROM "system$queuedtask" WHERE "id"=4785074604345960
 COMMIT
+DELETE FROM "system$queuedtask" WHERE "id"=4785074604346005
+INSERT INTO "system$queuedtask" VALUES(4785074604346005,1108,'Running','59651013-f9bc-4fc1-b435-276439b07899','System.ScheduledEventsQueue','ScheduledEvent',NULL,NULL,'ClusterManagement-CleanupOrphanedFiles','[]','cc7f5047-625c-49fe-9eea-1167c0d1bc8f',44,'2024-09-27 12:44:42.764000','2024-09-27 12:49:42.044000','2024-09-27 12:49:42.477000',0,NULL,'ClusterManagement-CleanupOrphanedFiles',NULL)
+COMMIT
+ALTER SEQUENCE PUBLIC."system$queuedtask_sequence_mxseq" RESTART WITH 1119
+INSERT INTO "system$queuedtask" VALUES(4785074604347274,1118,'Idle','59651013-f9bc-4fc1-b435-276439b07899','System.ScheduledEventsQueue','ScheduledEvent',NULL,NULL,'ClusterManagement-CleanupOrphanedFiles','[]',NULL,NULL,'2024-09-27 12:49:42.481000','2024-09-27 12:54:42.044000',NULL,0,NULL,'ClusterManagement-CleanupOrphanedFiles',NULL)
+INSERT INTO "system$processedqueuetask" VALUES(13510798882377629,1108,'Completed','59651013-f9bc-4fc1-b435-276439b07899','System.ScheduledEventsQueue','ScheduledEvent',NULL,NULL,'ClusterManagement-CleanupOrphanedFiles','[]','cc7f5047-625c-49fe-9eea-1167c0d1bc8f',44,'2024-09-27 12:44:42.764000','2024-09-27 12:49:42.044000','2024-09-27 12:49:42.477000','2024-09-27 12:49:42.485000',8,0,NULL,'ClusterManagement-CleanupOrphanedFiles',NULL)
+DELETE FROM "system$queuedtask" WHERE "id"=4785074604346005
+COMMIT
